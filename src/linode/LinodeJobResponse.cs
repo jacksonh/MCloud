@@ -2,7 +2,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
+
 
 namespace MCloud.Linode {
 
@@ -29,12 +29,16 @@ namespace MCloud.Linode {
 
 		public static LinodeJobResponse FromJson (string js)
 		{
+			/*
 			Console.WriteLine ("RESPONSE");
 			Console.WriteLine (js);
 			Console.WriteLine ();
 
 			JavaScriptSerializer jss = new JavaScriptSerializer ();
 			return jss.Deserialize<LinodeJobResponse> (js);
+			*/
+
+			return null;
 		}
 	}
 }

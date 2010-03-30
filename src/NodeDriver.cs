@@ -38,6 +38,8 @@ namespace MCloud {
 		public abstract List<Node> ListNodes ();
 		public abstract List<NodeImage> ListImages ();
 		public abstract List<NodeImage> ListImages (NodeLocation location);
+		public abstract List<NodeSize> ListSizes ();
+		public abstract List<NodeSize> ListSizes (NodeLocation location);
 		public abstract List<NodeLocation> ListLocations ();
 		
 	}

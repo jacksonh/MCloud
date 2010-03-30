@@ -43,17 +43,27 @@ namespace MCloud.Linode {
 
 		public override List<NodeImage> ListImages ()
 		{
-			return null;
+			return API.ListImages (null);
 		}
 
 		public override List<NodeImage> ListImages (NodeLocation location)
 		{
-			return null;
+			return API.ListImages (location);
+		}
+
+		public override List<NodeSize> ListSizes ()
+		{
+			return API.ListSizes (null);
+		}
+
+		public override List<NodeSize> ListSizes (NodeLocation location)
+		{
+			return API.ListSizes (location);
 		}
 
 		public override List<NodeLocation> ListLocations ()
 		{
-			return null;
+			return API.ListLocations ();
 		}
 	}
 

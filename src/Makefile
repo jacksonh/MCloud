@@ -11,16 +11,19 @@ SOURCES=Entity.cs  			\
 	linode/LinodeCertificatePolicy.cs	\
 	linode/LinodeDriver.cs		\
 	linode/LinodeError.cs		\
-	linode/LinodeJobResponse.cs	\
 	linode/LinodeNode.cs		\
 	linode/LinodeResponse.cs 	\
 	linode/LinodeRequest.cs
 
 LIBS=-r:System.Web.dll			\
-     -r:System.Web.Extensions.dll 
+     -r:Newtonsoft.Json.Net20.dll	
 
 MCloud.dll: $(SOURCES)
-	gmcs -target:library -out:MCloud.dll $(LIBS) $(SOURCES)
+	gmcs -target:library -out:MCloud.dll -debug $(LIBS) $(SOURCES)
 
 test.exe: MCloud.dll
-	gmcs -r:MCloud.dll test.cs
+	gmcs -r:MCloud.dll -debug test.cs
+
+clean:
+	rm -rf MCloud.dll
+	rm -rf test.exe

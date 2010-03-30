@@ -1,4 +1,5 @@
 
+using System;
 
 namespace MCloud {
 
@@ -24,6 +25,11 @@ namespace MCloud {
 		public NodeDriver Driver {
 			get;
 			private set;
+		}
+
+		public override string ToString ()
+		{
+			return String.Format ("id=\"{0}\" name=\"{1}\" driver=\"{2}\"", Id, Name, Driver.Provider);
 		}
 	}
 

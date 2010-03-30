@@ -6,12 +6,18 @@ namespace MCloud.Linode {
 
 	public class LinodeError {
 
-		public string ERRORMESSAGE {
+		public LinodeError (string message, int code)
+		{
+			Message = message;
+			Code = code;
+		}
+
+		public string Message {
 			get;
 			set;
 		}
 
-		public int ERRORCODE {
+		public int Code {
 			get;
 			set;
 		}
