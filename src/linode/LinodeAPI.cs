@@ -72,7 +72,7 @@ namespace MCloud.Linode {
 				string id = obj ["PLANID"].ToString ();
 				string name = (string) obj ["LABEL"];
 				int ram = (int) obj ["RAM"];
-				int disk = (int) obj ["DISK"];
+				int disk = (int) obj ["DISK"] * 1024;
 				int bandwidth = (int) obj ["XFER"];
 				float price = (float) obj ["PRICE"]; // price in dollars, we use cents
 
@@ -106,6 +106,54 @@ namespace MCloud.Linode {
 			}
 
 			return locations;
+		}
+
+		public Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location, int swap=128)
+		{
+			int rsize = size.Disk - swap;
+
+			string kernel = FindKernel ();
+
+			Console.WriteLine ("USING KERNEL:  {0}", kernel);
+
+			LinodeRequest request = new LinodeRequest ("linode.create", new Dictionary<string,object> {
+				{"DatacenterID", location.Id}, {"PlanID", size.Id},
+				{"PaymentTerm", (int) driver.PaymentTerm}});
+			LinodeResponse response = Execute (request);
+
+			JObject node = response.Data [0];
+			string id = node ["LinodeID"].ToString ();
+
+			request = new LinodeRequest ("linode.disk.createfromdistribution", new Dictionary<string,object> {
+				{"LinodeID", id}, {"DistributionID", image.Id}, {"Label", name}, {"Size", size.Disk},
+				{"rootPass", "F23444sd"}});
+
+			response = Execute (request);
+
+			JObject distro = response.Data [0];
+			string root_disk = distro ["DiskID"].ToString ();
+
+			request = new LinodeRequest ("linode.disk.create", new Dictionary<string,object> {
+				{"LinodeID", id}, {"Label", "Swap"}, {"Type", "swap"}, {"Size", swap}});
+			response = Execute (request);
+
+			string swap_disk = response.Data [0] ["DiskID"].ToString ();
+			string disks = String.Format ("{0},{1},,,,,,,", root_disk, swap_disk);
+
+
+			request = new LinodeRequest ("linode.config.create", new Dictionary<string,object> {
+				{"LinodeID", id}, {"KernelID", kernel}, {"Label", "mcloud config"}, {"DiskList", disks}});
+			response = Execute (request);
+
+			string config = response.Data [0]["ConfigID"].ToString ();
+
+			request = new LinodeRequest ("linode.boot", new Dictionary<string,object> {
+				{"LinodeID", id}, {"ConfigID", config}});
+			response = Execute (request);
+
+
+			
+			return null;
 		}
 
 		public bool RebootNode (Node node)
@@ -150,6 +198,22 @@ namespace MCloud.Linode {
 				else
 					private_ips.Add (IPAddress.Parse ((string) ip ["IPADDRESS"]));
 			}
+		}
+
+		private string FindKernel ()
+		{
+			LinodeRequest request = new LinodeRequest ("avail.kernels");
+			LinodeResponse response = Execute (request);
+
+			foreach (JObject kernel in response.Data) {
+				string label = (string) kernel ["LABEL"];
+				if (driver.Prefer64Bit && label == driver.Kernel64Bit)
+					return kernel ["KERNELID"].ToString ();
+				else if (!driver.Prefer64Bit && label == driver.Kernel32Bit)
+					return kernel ["KERNELID"].ToString ();
+			}
+
+			throw new Exception ("Unable to find a suitable Linode kernel");
 		}
 
 		private string GenerateBaseURL ()

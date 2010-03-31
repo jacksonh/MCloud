@@ -44,6 +44,8 @@ public class T {
 		foreach (Node node in nodes) {
 			Console.WriteLine (node);
 		}
+
+		driver.CreateNode ("test node", sizes [0], images [0], locations [0]);
 	}
 }
 

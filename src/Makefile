@@ -13,7 +13,8 @@ SOURCES=Entity.cs  			\
 	linode/LinodeError.cs		\
 	linode/LinodeNode.cs		\
 	linode/LinodeResponse.cs 	\
-	linode/LinodeRequest.cs
+	linode/LinodeRequest.cs		\
+	linode/PaymentTerm.cs
 
 LIBS=-r:System.Web.dll			\
      -r:Newtonsoft.Json.Net20.dll	

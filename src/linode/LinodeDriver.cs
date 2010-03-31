@@ -7,12 +7,40 @@ namespace MCloud.Linode {
 
 	public class LinodeDriver : NodeDriver {
 
+		public static readonly PaymentTerm DefaultPaymentTerm = PaymentTerm.Monthly;
+		public static readonly string Default64BitKernel = "Latest 2.6 Stable (2.6.18.8-linode22)";
+		public static readonly string Default32BitKernel = "Latest 2.6 Stable (2.6.18.8-x86_64-linode10)";
+
 		public LinodeDriver (string key, string secret) : base (key, secret)
 		{
 			API = new LinodeAPI (this);
+
+			PaymentTerm = DefaultPaymentTerm;
+			Kernel64Bit = Default64BitKernel;
+			Kernel32Bit = Default32BitKernel;
 		}
 
 		public LinodeAPI API {
+			get;
+			private set;
+		}
+
+		public PaymentTerm PaymentTerm {
+			get;
+			private set;
+		}
+
+		public bool Prefer64Bit {
+			get;
+			private set;
+		}
+
+		public string Kernel64Bit {
+			get;
+			private set;
+		}
+
+		public string Kernel32Bit {
 			get;
 			private set;
 		}
@@ -23,7 +51,7 @@ namespace MCloud.Linode {
 
 		public override Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location)
 		{
-			return null;
+			return API.CreateNode (name, size, image, location);
 		}
 
 		public override bool DestroyNode (Node node)
