@@ -31,6 +31,10 @@ namespace MCloud {
 			get;
 		}
 
+		public abstract NodeOptions DefaultOptions {
+			get;
+		}
+
 		public abstract Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location, NodeAuth auth, NodeOptions options);
 
 		public abstract bool DestroyNode (Node node);

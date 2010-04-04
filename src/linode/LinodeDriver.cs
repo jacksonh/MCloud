@@ -21,6 +21,10 @@ namespace MCloud.Linode {
 			get { return NodeProvider.Linode; }
 		}
 
+		public override NodeOptions DefaultOptions {
+			get { return new LinodeNodeOptions (); }
+		}
+
 		public override Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location, NodeAuth auth, NodeOptions options)
 		{
 			LinodeNodeOptions ops = options as LinodeNodeOptions;
