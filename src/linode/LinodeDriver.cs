@@ -49,14 +49,14 @@ namespace MCloud.Linode {
 			get { return NodeProvider.Linode; }
 		}
 
-		public override Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location)
+		public override Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location, NodeAuth auth)
 		{
-			return API.CreateNode (name, size, image, location);
+			return API.CreateNode (name, size, image, location, auth);
 		}
 
 		public override bool DestroyNode (Node node)
 		{
-			return true;
+			return API.DestroyNode (node);
 		}
 
 		public override bool RebootNode (Node node)

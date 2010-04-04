@@ -108,13 +108,11 @@ namespace MCloud.Linode {
 			return locations;
 		}
 
-		public Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location, int swap=128)
+		public Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location, NodeAuth auth, int swap=128)
 		{
 			int rsize = size.Disk - swap;
 
 			string kernel = FindKernel ();
-
-			Console.WriteLine ("USING KERNEL:  {0}", kernel);
 
 			LinodeRequest request = new LinodeRequest ("linode.create", new Dictionary<string,object> {
 				{"DatacenterID", location.Id}, {"PlanID", size.Id},
@@ -124,9 +122,18 @@ namespace MCloud.Linode {
 			JObject node = response.Data [0];
 			string id = node ["LinodeID"].ToString ();
 
+			string root_pass;
+			if (auth.Type == NodeAuthType.Password)
+				root_pass = auth.Secret;
+			else
+				root_pass = GenerateRandomPassword ();
+
 			request = new LinodeRequest ("linode.disk.createfromdistribution", new Dictionary<string,object> {
-				{"LinodeID", id}, {"DistributionID", image.Id}, {"Label", name}, {"Size", size.Disk},
-				{"rootPass", "F23444sd"}});
+				{"LinodeID", id}, {"DistributionID", image.Id}, {"Label", name}, {"Size", rsize},
+				{"rootPass", root_pass}});
+
+			if (auth.Type == NodeAuthType.SSHKey)
+				request.Parameters.Add ("rootSSHKey", auth.Secret);
 
 			response = Execute (request);
 
@@ -151,9 +158,19 @@ namespace MCloud.Linode {
 				{"LinodeID", id}, {"ConfigID", config}});
 			response = Execute (request);
 
+			request = new LinodeRequest ("linode.list", new Dictionary<string,object> {{"LinodeID", id}});
+			response = Execute (request);
 
-			
-			return null;
+			return LinodeNode.FromData (response.Data [0], driver);
+		}
+
+		public bool DestroyNode (Node node)
+		{
+			LinodeRequest request = new LinodeRequest ("linode.delete", new Dictionary<string,object> {
+				{"LinodeID", node.Id}, {"skipChecks", true}});
+			LinodeResponse response = Execute (request);
+
+			return true;
 		}
 
 		public bool RebootNode (Node node)
@@ -219,6 +236,11 @@ namespace MCloud.Linode {
 		private string GenerateBaseURL ()
 		{
 			return String.Concat (ApiEndpoint, "?api_key=", driver.Key);
+		}
+
+		private string GenerateRandomPassword ()
+		{
+			return System.Web.Security.Membership.GeneratePassword (12, 3);
 		}
 	}
 }
