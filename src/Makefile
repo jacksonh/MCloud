@@ -6,6 +6,7 @@ SOURCES=Entity.cs  			\
 	NodeDriver.cs  			\
 	NodeImage.cs  			\
 	NodeLocation.cs 		\
+	NodeOptions.cs			\
 	NodeProvider.cs			\
 	NodeSize.cs  			\
 	NodeState.cs			\
@@ -14,6 +15,7 @@ SOURCES=Entity.cs  			\
 	linode/LinodeDriver.cs		\
 	linode/LinodeError.cs		\
 	linode/LinodeNode.cs		\
+	linode/LinodeNodeOptions.cs	\
 	linode/LinodeResponse.cs 	\
 	linode/LinodeRequest.cs		\
 	linode/PaymentTerm.cs

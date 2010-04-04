@@ -108,15 +108,15 @@ namespace MCloud.Linode {
 			return locations;
 		}
 
-		public Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location, NodeAuth auth, int swap=128)
+		public Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location, NodeAuth auth, LinodeNodeOptions options)
 		{
-			int rsize = size.Disk - swap;
+			int rsize = size.Disk - options.SwapSize;
 
-			string kernel = FindKernel ();
+			string kernel = FindKernel (options);
 
 			LinodeRequest request = new LinodeRequest ("linode.create", new Dictionary<string,object> {
 				{"DatacenterID", location.Id}, {"PlanID", size.Id},
-				{"PaymentTerm", (int) driver.PaymentTerm}});
+				{"PaymentTerm", (int) options.PaymentTerm}});
 			LinodeResponse response = Execute (request);
 
 			JObject node = response.Data [0];
@@ -141,7 +141,7 @@ namespace MCloud.Linode {
 			string root_disk = distro ["DiskID"].ToString ();
 
 			request = new LinodeRequest ("linode.disk.create", new Dictionary<string,object> {
-				{"LinodeID", id}, {"Label", "Swap"}, {"Type", "swap"}, {"Size", swap}});
+				{"LinodeID", id}, {"Label", "Swap"}, {"Type", "swap"}, {"Size", options.SwapSize}});
 			response = Execute (request);
 
 			string swap_disk = response.Data [0] ["DiskID"].ToString ();
@@ -217,16 +217,16 @@ namespace MCloud.Linode {
 			}
 		}
 
-		private string FindKernel ()
+		private string FindKernel (LinodeNodeOptions options)
 		{
 			LinodeRequest request = new LinodeRequest ("avail.kernels");
 			LinodeResponse response = Execute (request);
 
 			foreach (JObject kernel in response.Data) {
 				string label = (string) kernel ["LABEL"];
-				if (driver.Prefer64Bit && label == driver.Kernel64Bit)
+				if (options.Prefer64Bit && label == options.Kernel64Bit)
 					return kernel ["KERNELID"].ToString ();
-				else if (!driver.Prefer64Bit && label == driver.Kernel32Bit)
+				else if (!options.Prefer64Bit && label == options.Kernel32Bit)
 					return kernel ["KERNELID"].ToString ();
 			}
 
