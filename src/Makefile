@@ -1,6 +1,8 @@
 
 SOURCES=Entity.cs  			\
 	Node.cs  			\
+	NodeAuth.cs			\
+	NodeAuthType.cs			\
 	NodeDriver.cs  			\
 	NodeImage.cs  			\
 	NodeLocation.cs 		\
