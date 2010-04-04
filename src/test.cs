@@ -45,7 +45,12 @@ public class T {
 			Console.WriteLine (node);
 		}
 
-		driver.CreateNode ("test node", sizes [0], images [0], locations [0]);
+		Node new_node = driver.CreateNode ("test node", sizes [0], images [0], locations [0]);
+
+		Console.WriteLine ("just created the node:  {0}", new_node);
+
+		new_node.Destroy ();
+		Console.WriteLine ("destroyed the new node");
 	}
 }
 
