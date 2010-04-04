@@ -3,3 +3,9 @@ MCloud is a managed unified interface to various cloud providers.  It
 is heavily based on libcloud (http://www.libcloud.net) with only small
 changes to make the API more .net friendly.
 
+This project is obviously not very far along but checkout test.cs to
+see what you can do.  To run this test you need to have a linode API
+key.  Also you should note that running this test will create/delete a new
+Linode on your account and that is going to cost you a days worth of
+Linode service (Aprox $1).
+
