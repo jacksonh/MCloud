@@ -1,0 +1,5 @@
+
+MCloud is a managed unified interface to various cloud providers.  It
+is heavily based on libcloud (http://www.libcloud.net) with only small
+changes to make the API more .net friendly.
+
