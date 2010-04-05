@@ -1,5 +1,7 @@
 
-SOURCES=Entity.cs  			\
+SOURCES=Deployment.cs			\
+	Entity.cs  			\
+	MultiStepDeployment.cs		\
 	Node.cs  			\
 	NodeAuth.cs			\
 	NodeAuthType.cs			\
@@ -10,6 +12,8 @@ SOURCES=Entity.cs  			\
 	NodeProvider.cs			\
 	NodeSize.cs  			\
 	NodeState.cs			\
+	ScriptDeployment.cs		\
+	SSHKeyDeployment.cs		\
 	linode/LinodeAPI.cs		\
 	linode/LinodeCertificatePolicy.cs	\
 	linode/LinodeDriver.cs		\
@@ -21,7 +25,9 @@ SOURCES=Entity.cs  			\
 	linode/PaymentTerm.cs
 
 LIBS=-r:System.Web.dll			\
-     -r:Newtonsoft.Json.Net20.dll	
+     -r:Newtonsoft.Json.Net20.dll	\
+     -r:Org.Mentalis.Security.dll	\
+     -r:Tamir.SharpSSH.dll
 
 MCloud.dll: $(SOURCES)
 	gmcs -target:library -out:MCloud.dll -debug $(LIBS) $(SOURCES)
