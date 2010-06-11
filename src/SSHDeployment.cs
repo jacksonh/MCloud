@@ -21,13 +21,8 @@ namespace MCloud {
 			private set;
 		}
 
-		public override void Run (Node node, NodeAuth auth)
+		protected override void RunImpl (Node node, NodeAuth auth)
 		{
-			if (node == null)
-				throw new ArgumentNullException ("node");
-			if (auth == null)
-				throw new ArgumentNullException ("auth");
-
 			if (node.PublicIPs.Count < 1)
 				throw new ArgumentException ("node", "No public IPs available on node.");
 
@@ -52,6 +47,8 @@ namespace MCloud {
 		{
 			if (auth.Type == NodeAuthType.Password)
 				ssh.Password = auth.Secret;
+			if (auth.Type == NodeAuthType.SSHKey)
+				ssh.AddIdentityFile (auth.Secret);
 
 			Console.WriteLine ("Connecting...");
 			ssh.Connect ();

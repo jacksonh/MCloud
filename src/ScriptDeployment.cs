@@ -28,7 +28,7 @@ namespace MCloud {
 			private set;
 		}
 
-		public override void Run (Node node, NodeAuth auth)
+		protected override void RunImpl (Node node, NodeAuth auth)
 		{
 			
 			if (node == null)
