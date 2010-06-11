@@ -23,7 +23,7 @@ namespace MCloud {
 			Steps.Add (step);
 		}
 
-		public override void Run (Node node, NodeAuth auth)
+		protected override void RunImpl (Node node, NodeAuth auth)
 		{
 			foreach (Deployment d in Steps) {
 				d.Run (node, auth);
