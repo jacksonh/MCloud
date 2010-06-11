@@ -22,11 +22,6 @@ namespace MCloud {
 			private set;
 		}
 
-		public bool DeployNode ()
-		{
-			return true;
-		}
-
 		public abstract NodeProvider Provider {
 			get;
 		}

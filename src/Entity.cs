@@ -24,7 +24,7 @@ namespace MCloud {
 
 		public NodeDriver Driver {
 			get;
-			private set;
+			internal set;
 		}
 
 		public override string ToString ()

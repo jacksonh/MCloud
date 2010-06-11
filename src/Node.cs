@@ -47,6 +47,11 @@ namespace MCloud {
 			return Driver.DestroyNode (this);
 		}
 
+		public void Deploy (Deployment d, NodeAuth auth)
+		{
+			d.Run (this, auth);
+		}
+
 		public override string ToString ()
 		{
 			return String.Format ("Node uuid=\"{0}\" name=\"{1}\" state=\"{2}\" " +

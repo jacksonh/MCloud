@@ -1,6 +1,6 @@
 
-SOURCES=Deployment.cs			\
-	Entity.cs  			\
+SOURCES=Entity.cs  			\
+	Deployment.cs			\
 	MultiStepDeployment.cs		\
 	Node.cs  			\
 	NodeAuth.cs			\
@@ -13,7 +13,12 @@ SOURCES=Deployment.cs			\
 	NodeSize.cs  			\
 	NodeState.cs			\
 	ScriptDeployment.cs		\
+	SSHDeployment.cs		\
 	SSHKeyDeployment.cs		\
+	EC2/EC2Driver.cs		\
+	EC2/EC2Node.cs			\
+	EC2/EC2NodeOptions.cs		\
+	EC2/EC2NodeSizes.cs		\
 	linode/LinodeAPI.cs		\
 	linode/LinodeCertificatePolicy.cs	\
 	linode/LinodeDriver.cs		\
@@ -26,13 +31,15 @@ SOURCES=Deployment.cs			\
 
 LIBS=-r:System.Web.dll			\
      -r:Newtonsoft.Json.Net20.dll	\
-     -r:Org.Mentalis.Security.dll	\
-     -r:Tamir.SharpSSH.dll
+     -r:DiffieHellman.dll  		\
+     -r:Org.Mentalis.Security.dll  	\
+     -r:Tamir.SharpSSH.dll		\
+     -r:AWSSDK.dll
 
 MCloud.dll: $(SOURCES)
 	gmcs -target:library -out:MCloud.dll -debug $(LIBS) $(SOURCES)
 
-test.exe: MCloud.dll
+test.exe: test.cs MCloud.dll
 	gmcs -r:MCloud.dll -debug test.cs
 
 clean:

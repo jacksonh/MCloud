@@ -6,7 +6,7 @@ using Tamir.SharpSsh;
 
 namespace MCloud {
 
-	public class ScriptDeployment : Deployment {
+	public class ScriptDeployment : SSHDeployment {
 
 		public ScriptDeployment (string local_path) : this (local_path, String.Concat ("/root/", local_path))
 		{
@@ -30,6 +30,7 @@ namespace MCloud {
 
 		public override void Run (Node node, NodeAuth auth)
 		{
+			
 			if (node == null)
 				throw new ArgumentNullException ("node");
 			if (auth == null)
@@ -40,8 +41,7 @@ namespace MCloud {
 
 			string host = node.PublicIPs [0].ToString ();
 			CopyScript (host, auth);
-			
-			SshExec exec = new SshExec (host, auth.UserName);
+			RunCommand (RemoteScriptPath, host, auth);
 		}
 
 		private void CopyScript (string host, NodeAuth auth)
@@ -52,21 +52,6 @@ namespace MCloud {
 
 			scp.Put (LocalScriptPath, RemoteScriptPath);
 			scp.Close ();
-		}
-
-		private void RunScript (string host, NodeAuth auth)
-		{
-			SshExec exec = new SshExec (host, auth.UserName);
-
-			SetupSSH (exec, auth);
-
-			exec.RunCommand (RemoteScriptPath);
-		}
-
-		private void SetupSSH (SshBase ssh, NodeAuth auth)
-		{
-			if (auth.Type == NodeAuthType.Password)
-				ssh.Password = auth.Secret;
 		}
 	}
 }

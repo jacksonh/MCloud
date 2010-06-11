@@ -1,11 +1,12 @@
 
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace MCloud {
 
-	public class MultiStepDeployment : Deployment {
+	public class MultiStepDeployment : Deployment, IEnumerable {
 
 		public MultiStepDeployment ()
 		{
@@ -17,11 +18,21 @@ namespace MCloud {
 			private set;
 		}
 
+		public void Add (Deployment step)
+		{
+			Steps.Add (step);
+		}
+
 		public override void Run (Node node, NodeAuth auth)
 		{
 			foreach (Deployment d in Steps) {
 				d.Run (node, auth);
 			}
+		}
+
+		IEnumerator IEnumerable.GetEnumerator ()
+		{
+			return Steps.GetEnumerator ();
 		}
 	}
 }
