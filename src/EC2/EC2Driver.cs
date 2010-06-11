@@ -34,7 +34,7 @@ namespace MCloud.EC2 {
 		{
 			EC2NodeOptions ops = options as EC2NodeOptions;
 			if (ops == null && options != null)
-				throw new Exception ("Only EC2NodeOptions can be used as NodeOptions for creating Linode Nodes.");
+				throw new Exception ("Only EC2NodeOptions can be used as NodeOptions for creating EC2 Nodes.");
 			else if (ops == null)
 				ops = new EC2NodeOptions ();
 
