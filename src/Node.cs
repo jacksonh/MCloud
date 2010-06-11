@@ -18,23 +18,28 @@ namespace MCloud {
 
 		public NodeState State {
 			get;
-			private set;
+			internal set;
 		}
 
 		public List<IPAddress> PublicIPs {
 			get;
-			private set;
+			internal set;
 		}
 
 		public List<IPAddress> PrivateIPs {
 			get;
-			private set;
+			internal set;
 		}
 
 		public string UUID {
 			get {
 				return String.Format ("{0}:{1}", Id, Driver.Provider);
 			}
+		}
+
+		public void Update ()
+		{
+			Driver.UpdateNode (this);
 		}
 
 		public bool Reboot ()

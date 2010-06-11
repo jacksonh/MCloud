@@ -43,6 +43,7 @@ namespace MCloud.EC2 {
 				ImageId = image.Id,
 				MinCount = 1,
 				MaxCount = 1,
+				KeyName = auth.UserName,
 			};
 			RunInstancesResponse response = Client.RunInstances (request);
 
@@ -51,6 +52,22 @@ namespace MCloud.EC2 {
 			}
 
 			return null;
+		}
+
+		
+		public override void UpdateNode (Node node)
+		{
+			List<Node> nodes = ListNodes (node.Id);
+
+			if (nodes.Count < 1)
+				throw new Exception ("Unable to update node. The node no longer exists.");
+
+			Node n = nodes [0];
+
+			node.Name = n.Name;
+			node.State = n.State;
+			node.PublicIPs = n.PublicIPs;
+			node.PrivateIPs = n.PrivateIPs;
 		}
 
 		public override bool DestroyNode (Node node)
@@ -71,7 +88,16 @@ namespace MCloud.EC2 {
 
 		public override List<Node> ListNodes ()
 		{
+			return ListNodes (null);
+		}
+
+		private List<Node> ListNodes (string id)
+		{
 			DescribeInstancesRequest request = new DescribeInstancesRequest ();
+
+			if (id != null)
+				request.InstanceId.Add (id);
+
 			DescribeInstancesResponse response = Client.DescribeInstances (request);
 
 			List<Node> res = new List<Node> ();

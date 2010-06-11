@@ -32,6 +32,7 @@ namespace MCloud {
 
 		public abstract Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location, NodeAuth auth, NodeOptions options);
 
+		public abstract void UpdateNode (Node node);
 		public abstract bool DestroyNode (Node node);
 		public abstract bool RebootNode (Node node);
 		public abstract List<Node> ListNodes ();

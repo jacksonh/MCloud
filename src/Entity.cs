@@ -19,7 +19,7 @@ namespace MCloud {
 
 		public string Name {
 			get;
-			private set;
+			internal set;
 		}
 
 		public NodeDriver Driver {

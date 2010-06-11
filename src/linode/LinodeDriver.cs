@@ -35,6 +35,11 @@ namespace MCloud.Linode {
 			return API.CreateNode (name, size, image, location, auth, ops);
 		}
 
+		public override void UpdateNode (Node node)
+		{
+			API.UpdateNode (node);
+		}
+
 		public override bool DestroyNode (Node node)
 		{
 			return API.DestroyNode (node);

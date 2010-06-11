@@ -32,9 +32,33 @@ namespace MCloud.Linode {
 			LinodeResponse response = Execute (request);
 		}
 
+		public void UpdateNode (Node node)
+		{
+			List<Node> nodes = ListNodes (node.Id);
+
+			if (nodes.Count < 1)
+				throw new Exception ("Unable to update node. The node no longer exists.");
+
+			Node n = nodes [0];
+
+			node.Name = n.Name;
+			node.State = n.State;
+			node.PublicIPs = n.PublicIPs;
+			node.PrivateIPs = n.PrivateIPs;
+		}
+
 		public List<Node> ListNodes ()
 		{
+			return ListNodes (null);
+		}
+
+		public List<Node> ListNodes (string id)
+		{
 			LinodeRequest request = new LinodeRequest ("linode.list");
+
+			if (id != null)
+				request.Parameters.Add ("LinodeID", id);
+
 			LinodeResponse response = Execute (request);
 			
 			List<Node> nodes = new List<Node> ();
