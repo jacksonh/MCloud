@@ -1,7 +1,5 @@
 
 SOURCES=Entity.cs  			\
-	Deployment.cs			\
-	MultiStepDeployment.cs		\
 	Node.cs  			\
 	NodeAuth.cs			\
 	NodeAuthType.cs			\
@@ -12,22 +10,27 @@ SOURCES=Entity.cs  			\
 	NodeProvider.cs			\
 	NodeSize.cs  			\
 	NodeState.cs			\
-	ScriptDeployment.cs		\
-	SSHDeployment.cs		\
-	SSHKeyDeployment.cs		\
-	EC2/EC2Driver.cs		\
-	EC2/EC2Node.cs			\
-	EC2/EC2NodeOptions.cs		\
-	EC2/EC2NodeSizes.cs		\
-	linode/LinodeAPI.cs		\
-	linode/LinodeCertificatePolicy.cs	\
-	linode/LinodeDriver.cs		\
-	linode/LinodeError.cs		\
-	linode/LinodeNode.cs		\
-	linode/LinodeNodeOptions.cs	\
-	linode/LinodeResponse.cs 	\
-	linode/LinodeRequest.cs		\
-	linode/PaymentTerm.cs
+	MCloud.Deploy/Deployment.cs			\
+	MCloud.Deploy/MultiStepDeployment.cs		\
+	MCloud.Deploy/PutDirectoryDeployment.cs	\
+	MCloud.Deploy/PutFileDeployment.cs		\
+	MCloud.Deploy/PutFilesDeployment.cs		\
+	MCloud.Deploy/ScriptDeployment.cs		\
+	MCloud.Deploy/SSHDeployment.cs		\
+	MCloud.Deploy/SSHKeyDeployment.cs		\
+	MCloud.EC2/EC2Driver.cs		\
+	MCloud.EC2/EC2Node.cs			\
+	MCloud.EC2/EC2NodeOptions.cs		\
+	MCloud.EC2/EC2NodeSizes.cs		\
+	MCloud.Linode/LinodeAPI.cs		\
+	MCloud.Linode/LinodeCertificatePolicy.cs	\
+	MCloud.Linode/LinodeDriver.cs		\
+	MCloud.Linode/LinodeError.cs		\
+	MCloud.Linode/LinodeNode.cs		\
+	MCloud.Linode/LinodeNodeOptions.cs	\
+	MCloud.Linode/LinodeResponse.cs 	\
+	MCloud.Linode/LinodeRequest.cs		\
+	MCloud.Linode/PaymentTerm.cs
 
 LIBS=-r:System.Web.dll			\
      -r:Newtonsoft.Json.Net20.dll	\
