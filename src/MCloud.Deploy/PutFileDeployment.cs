@@ -4,7 +4,7 @@ using System;
 
 using Tamir.SharpSsh;
 
-namespace MCloud {
+namespace MCloud.Deploy {
 
 	public class PutFileDeployment : PutFilesDeployment {
 

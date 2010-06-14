@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace MCloud {
+namespace MCloud.Deploy {
 
 	public class MultiStepDeployment : Deployment, IEnumerable {
 

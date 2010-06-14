@@ -3,13 +3,16 @@ using System;
 
 using Tamir.SharpSsh;
 
-namespace MCloud {
+namespace MCloud.Deploy {
 
 	public class SSHDeployment : Deployment {
+
+		private static readonly int DefaultMaxConnectionAttempts = 3;
 
 		public SSHDeployment (string cmd)
 		{
 			Command = cmd;
+			MaxConnectionAttempts = DefaultMaxConnectionAttempts;
 		}
 
 		protected SSHDeployment ()
@@ -19,6 +22,11 @@ namespace MCloud {
 		public string Command {
 			get;
 			private set;
+		}
+
+		public int MaxConnectionAttempts {
+			get;
+			set;
 		}
 
 		protected override void RunImpl (Node node, NodeAuth auth)
@@ -35,11 +43,7 @@ namespace MCloud {
 		{
 			SshExec exec = new SshExec (host, auth.UserName);
 
-			Console.WriteLine ("Attempting to connect with to {2} {0}  and pass: {1}", auth.UserName, auth.Secret, host);
 			SetupSSH (exec, auth);
-
-			Console.WriteLine ("running command:  {0}   on host:  {1}", command, host);
-			Console.WriteLine (exec.RunCommand (command));
 			exec.Close ();
 		}
 
@@ -50,10 +54,21 @@ namespace MCloud {
 			if (auth.Type == NodeAuthType.SSHKey)
 				ssh.AddIdentityFile (auth.Secret);
 
-			Console.WriteLine ("Connecting...");
-			ssh.Connect ();
-			Console.WriteLine ("OK");
-			
+			Exception error = null;
+			for (int i = 0; i < MaxConnectionAttempts; i++) {
+
+				try{
+					ssh.Connect ();
+					return;
+				} catch (Exception e) {
+					Console.WriteLine ("Connection error: {0}", e);
+					error = e;
+				}
+			}
+
+			if (error != null)
+				throw error;
+
 		}
 	}
 }

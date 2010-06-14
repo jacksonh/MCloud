@@ -4,7 +4,7 @@ using System;
 
 using Tamir.SharpSsh;
 
-namespace MCloud {
+namespace MCloud.Deploy {
 
 	public class ScriptDeployment : PutFileDeployment {
 
@@ -21,8 +21,9 @@ namespace MCloud {
 			string host = node.PublicIPs [0].ToString ();
 
 			string remote = String.Concat (RemoteDirectory, FileName);
-			PutFile (host, auth, FileName, remote);
 
+			PutFile (host, auth, FileName, remote);
+			RunCommand ("chmod 775 " + remote, host, auth);
 			RunCommand (remote, host, auth);
 		}
 	}

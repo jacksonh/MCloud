@@ -4,19 +4,42 @@ using System.IO;
 
 using Tamir.SharpSsh;
 
-namespace MCloud {
+namespace MCloud.Deploy {
 
 	public class PutDirectoryDeployment : PutFilesDeployment {
 
-		public static readonly string DefaultPattern = "*";
-
-		public PutDirectoryDeployment (string local) : this (local, DefaultPattern)
+		public PutDirectoryDeployment (string local) : base ()
 		{
+			LocalDirectory = local;
 		}
 
-		public PutDirectoryDeployment (string local, string pattern)
+
+		public PutDirectoryDeployment (string local, string remote) : base (remote)
 		{
-			Files.AddRange (Directory.GetFiles (local, pattern));
+			LocalDirectory = local;
+			RemoteDirectory = remote;
+		}
+
+		public string LocalDirectory {
+			get;
+			set;
+		}
+
+		protected override void RunImpl (Node node, NodeAuth auth)
+		{			
+			string host = node.PublicIPs [0].ToString ();
+
+			PutDirectory (host, auth, LocalDirectory, RemoteDirectory);
+		}
+
+		protected void PutDirectory (string host, NodeAuth auth, string local, string remote)
+		{
+			Scp scp = new Scp (host, auth.UserName);
+
+			SetupSSH (scp, auth);
+
+			scp.To (local, remote + "/" + Path.GetFileName (local), true);
+			scp.Close ();
 		}
 	}
 }

@@ -6,7 +6,7 @@ using System.Threading;
 using Tamir.SharpSsh.jsch;
 
 
-namespace MCloud {
+namespace MCloud.Deploy {
 
 	public abstract class Deployment {
 

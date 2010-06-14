@@ -4,6 +4,8 @@ using System.Net;
 using System.Text;
 using System.Collections.Generic;
 
+using MCloud.Deploy;
+
 namespace MCloud {
 
 	public class Node : Entity {

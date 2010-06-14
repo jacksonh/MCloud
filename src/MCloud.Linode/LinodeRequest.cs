@@ -8,7 +8,7 @@ namespace MCloud.Linode {
 
 	internal class LinodeRequest {
 
-		public LinodeRequest (string action) : this (action, null)
+		public LinodeRequest (string action) : this (action, new Dictionary<string,object> ())
 		{
 		}
 

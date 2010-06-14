@@ -4,7 +4,7 @@ using System;
 
 using Tamir.SharpSsh.jsch;
 
-namespace MCloud {
+namespace MCloud.Deploy {
 
 	public class SSHKeyDeployment : ScriptDeployment {
 

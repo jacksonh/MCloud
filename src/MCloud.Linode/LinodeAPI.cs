@@ -113,6 +113,7 @@ namespace MCloud.Linode {
 			LinodeResponse response = Execute (request);
 
 			List<NodeLocation> locations = new List<NodeLocation> ();
+
 			foreach (JObject obj in response.Data) {
 				string id = obj ["DATACENTERID"].ToString ();
 				string location = (string) obj ["LOCATION"];
@@ -143,7 +144,6 @@ namespace MCloud.Linode {
 				{"PaymentTerm", (int) options.PaymentTerm}});
 			LinodeResponse response = Execute (request);
 
-			Console.WriteLine ("DATA:  {0}", response.Data);
 			JObject node = response.Data [0];
 			string id = node ["LinodeID"].ToString ();
 
@@ -163,7 +163,6 @@ namespace MCloud.Linode {
 			response = Execute (request);
 
 			JObject distro = response.Data [0];
-			Console.WriteLine ("DISTRO:  {0}", response.Data [0]);
 			string root_disk = distro ["DiskID"].ToString ();
 
 			request = new LinodeRequest ("linode.disk.create", new Dictionary<string,object> {
@@ -224,8 +223,8 @@ namespace MCloud.Linode {
 		internal LinodeResponse Execute (LinodeRequest request)
 		{
 			string url = String.Concat (base_url, request.UrlParams ());
-
 			string data = webclient.DownloadString (url);
+
 			return LinodeResponse.FromJson (data);
 		}
 

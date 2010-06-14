@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 using Tamir.SharpSsh;
 
-namespace MCloud {
+namespace MCloud.Deploy {
 
 	public class PutFilesDeployment : SSHDeployment, IEnumerable {
 
@@ -16,7 +16,7 @@ namespace MCloud {
 		{
 		}
 
-		public PutFilesDeployment (string remote)
+		public PutFilesDeployment (string remote) : base (remote)
 		{
 			RemoteDirectory = remote;
 			Files = new List<string> ();
@@ -49,7 +49,6 @@ namespace MCloud {
 			foreach (string file in Files) {
 				string remote = Path.Combine (RemoteDirectory, Path.GetFileName (file));
 
-				Console.WriteLine ("putting: {0}  on {1}", file, remote);
 				PutFile (host, auth, file, remote);
 			}
 		}
