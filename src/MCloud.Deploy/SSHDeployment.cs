@@ -1,5 +1,6 @@
 
 using System;
+using System.Threading;
 
 using Tamir.SharpSsh;
 
@@ -7,7 +8,7 @@ namespace MCloud.Deploy {
 
 	public class SSHDeployment : Deployment {
 
-		private static readonly int DefaultMaxConnectionAttempts = 3;
+		private static readonly int DefaultMaxConnectionAttempts = 10;
 
 		public SSHDeployment (string cmd)
 		{
@@ -44,6 +45,9 @@ namespace MCloud.Deploy {
 			SshExec exec = new SshExec (host, auth.UserName);
 
 			SetupSSH (exec, auth);
+
+			Console.WriteLine ("running command:  {0}   on host:  {1}", command, host);
+			Console.WriteLine (exec.RunCommand (command));
 			exec.Close ();
 		}
 
@@ -64,6 +68,8 @@ namespace MCloud.Deploy {
 					Console.WriteLine ("Connection error: {0}", e);
 					error = e;
 				}
+
+				Thread.Sleep (100);
 			}
 
 			if (error != null)
