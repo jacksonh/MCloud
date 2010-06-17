@@ -48,15 +48,18 @@ you can query for with MCloud:
 
  Returns a list of images such as "Open Suse 11.2" or "Red Hat".
 > driver.ListImages ();
+>
 > { NodeImage id="54" name="Slackware 12.2" driver="Linode", NodeImage id="41" name="Ubuntu 8.04 LTS" driver="Linode" }
 
 Returns a list of the geographical data center locations.
 > driver.ListLocations ();
-{ NodeLocation id="2" name="Dallas, TX, USA" driver="Linode" Country="US", NodeLocation id="3" name="Fremont, CA, USA" driver="Linode" Country="US", }
+>
+>{ NodeLocation id="2" name="Dallas, TX, USA" driver="Linode" Country="US", NodeLocation id="3" name="Fremont, CA, USA" driver="Linode" Country="US", }
 
 Returns a list of the available sizes (packages of ram, gb, transfer
 for set prices).
 > driver.ListSizes ()
+>
 > { NodeSize id="1" name="Linode 512" driver="Linode" ram="512" disk="16384" bandwidth="200" price="1995", NodeSize id="2" name="Linode 768" driver="Linode" ram="768" disk="24576" bandwidth="300" price="2995"}
 
 
