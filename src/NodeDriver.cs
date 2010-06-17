@@ -43,7 +43,7 @@ namespace MCloud {
 		/// </summary>
 		public Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location, NodeAuth auth)
 		{
-			CreateNode (name, size, image, location, auth, DefaultNodeOptions);
+			return CreateNode (name, size, image, location, auth, DefaultOptions);
 		}
 
 		public abstract Node CreateNode (string name, NodeSize size, NodeImage image, NodeLocation location, NodeAuth auth, NodeOptions options);

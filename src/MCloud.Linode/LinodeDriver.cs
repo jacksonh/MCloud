@@ -40,14 +40,14 @@ namespace MCloud.Linode {
 			API.UpdateNode (node);
 		}
 
-		public override bool DestroyNode (Node node)
+		public override void DestroyNode (Node node)
 		{
-			return API.DestroyNode (node);
+			API.DestroyNode (node);
 		}
 
-		public override bool RebootNode (Node node)
+		public override void RebootNode (Node node)
 		{
-			return API.RebootNode (node);
+			API.RebootNode (node);
 		}
 
 		public override List<Node> ListNodes ()

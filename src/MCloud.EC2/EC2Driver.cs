@@ -70,20 +70,16 @@ namespace MCloud.EC2 {
 			node.PrivateIPs = n.PrivateIPs;
 		}
 
-		public override bool DestroyNode (Node node)
+		public override void DestroyNode (Node node)
 		{
 			TerminateInstancesRequest request = new TerminateInstancesRequest () { InstanceId = new List<string> () { node.Id }};
 			TerminateInstancesResponse response = Client.TerminateInstances (request);
-
-			return true;
 		}
 
-		public override bool RebootNode (Node node)
+		public override void RebootNode (Node node)
 		{
 			RebootInstancesRequest request = new RebootInstancesRequest () { InstanceId = new List<string> () { node.Id }};
 			RebootInstancesResponse response = Client.RebootInstances (request);
-
-			return true;
 		}
 
 		public override List<Node> ListNodes ()
