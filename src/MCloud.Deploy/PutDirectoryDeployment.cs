@@ -38,7 +38,7 @@ namespace MCloud.Deploy {
 
 			SetupSSH (scp, auth);
 
-			scp.To (local, remote + "/" + Path.GetFileName (local), true);
+			scp.To (local, remote, true);
 			scp.Close ();
 		}
 	}
