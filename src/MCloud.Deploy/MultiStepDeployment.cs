@@ -6,6 +6,10 @@ using System.Collections.Generic;
 
 namespace MCloud.Deploy {
 
+	/// <summary>
+	/// A collection of deployments to run sequentially, they are run in
+	/// first-in first-out order.
+	/// </summary>
 	public class MultiStepDeployment : Deployment, IEnumerable {
 
 		public MultiStepDeployment ()
