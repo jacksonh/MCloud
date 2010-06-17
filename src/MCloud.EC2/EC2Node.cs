@@ -13,7 +13,7 @@ namespace MCloud.EC2 {
 
 	public class EC2Node : Node {
 
-		public EC2Node (string id, string name, NodeState state, List<IPAddress> public_ips,
+		internal EC2Node (string id, string name, NodeState state, List<IPAddress> public_ips,
 				List<IPAddress> private_ips, NodeDriver driver) : base (id, name, state, public_ips, private_ips, driver)
 		{
 		}

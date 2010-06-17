@@ -11,7 +11,7 @@ namespace MCloud.Linode {
 
 	public class LinodeNode : Node {
 
-		public LinodeNode (string id, string name, NodeState state, List<IPAddress> public_ips,
+	        internal LinodeNode (string id, string name, NodeState state, List<IPAddress> public_ips,
 				List<IPAddress> private_ips, NodeDriver driver) : base (id, name, state, public_ips, private_ips, driver)
 		{
 		}
