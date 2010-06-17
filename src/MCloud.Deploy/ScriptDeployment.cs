@@ -1,6 +1,7 @@
 
 
 using System;
+using System.IO;
 
 using Tamir.SharpSsh;
 
@@ -20,9 +21,9 @@ namespace MCloud.Deploy {
 		{			
 			string host = node.PublicIPs [0].ToString ();
 
-			string remote = String.Concat (RemoteDirectory, FileName);
+			string remote = String.Concat (RemoteDirectory, FilePath);
 
-			PutFile (host, auth, FileName, remote);
+			PutFile (host, auth, FilePath, remote);
 			RunCommand ("chmod 775 " + remote, host, auth);
 			RunCommand (remote, host, auth);
 		}

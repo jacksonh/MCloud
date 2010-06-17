@@ -6,10 +6,16 @@ using Tamir.SharpSsh;
 
 namespace MCloud.Deploy {
 
+	/// <summary>
+	/// Run an SSH command on the remote server
+	/// </summary>
 	public class SSHDeployment : Deployment {
 
 		private static readonly int DefaultMaxConnectionAttempts = 10;
 
+		/// <summary>
+		/// Run the specified command on the server
+		/// </summary>
 		public SSHDeployment (string cmd)
 		{
 			Command = cmd;
@@ -20,11 +26,17 @@ namespace MCloud.Deploy {
 		{
 		}
 
+		/// <summary>
+		/// The command to run on the server
+		/// </summary>
 		public string Command {
 			get;
 			private set;
 		}
 
+		/// <summary>
+		/// The maximum number of times to attempt to connect to the node before failing
+		/// </summary>
 		public int MaxConnectionAttempts {
 			get;
 			set;
