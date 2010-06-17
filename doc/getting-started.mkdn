@@ -84,8 +84,11 @@ to the node and now.  To get the update properties of the node use the
 Update () method.
 
 > node.Reboot ();
+>
 > while (node.State == NodeState.ShuttingDown) {
+>
 >     node.Update ();
+>
 > }
 
 
