@@ -1,0 +1,88 @@
+MCloud Getting Started Guide
+=============================
+
+
+Creating accounts
+=================
+MCloud is a managed interface to various cloud providers.  To do
+anything useful with MCloud you will need to have accounts with at
+least one of these cloud providers.
+
+Currently the two supported cloud providers are Linode and EC2:
+
+### EC2
+
+EC2 users should sign up at http://aws.amazon.com. Once you are signed
+up you can get your access key and your secret access key by clicking Account and
+then SecurityCredentials. In this guide we will refer to the Access
+Key ID as your user ID and the Secret Access Key as your user key.
+
+### Linode
+
+Linode users should sign up at http://linode.com. Once you are signed
+up you can get your key by clicking the My Profile link and scrolling
+down to the API key.  The API key is a unique ID that acts as a
+username AND password. Since the API key refers to both your username
+and password, it as used as a NodeAuth.Username in MCloud.
+
+
+
+
+Logging in to your cloud provider 
+=================================
+MCloud uses an abstract Driver type for interacting with your cloud
+provider. To create a Driver you just instantiate one of the Driver
+types:
+
+> NodeDriver driver = new MCloud.Linode.LinodeDriver (api_key);
+OR:
+> NodeDriver driver = new MCloud.EC2.EC2Driver (access_id, secret_access_id);
+
+
+
+Listing your cloud providers available packages
+===============================================
+Once you have created an instance of a Driver you can query your cloud
+provider to see what sort of node you can create. Here are the things
+you can query for with MCloud:
+
+ Returns a list of images such as "Open Suse 11.2" or "Red Hat".
+> driver.ListImages ();
+> { NodeImage id="54" name="Slackware 12.2" driver="Linode", NodeImage id="41" name="Ubuntu 8.04 LTS" driver="Linode" }
+
+Returns a list of the geographical data center locations.
+> driver.ListLocations ();
+{ NodeLocation id="2" name="Dallas, TX, USA" driver="Linode" Country="US", NodeLocation id="3" name="Fremont, CA, USA" driver="Linode" Country="US", }
+
+Returns a list of the available sizes (packages of ram, gb, transfer
+for set prices).
+> driver.ListSizes ()
+> { NodeSize id="1" name="Linode 512" driver="Linode" ram="512" disk="16384" bandwidth="200" price="1995", NodeSize id="2" name="Linode 768" driver="Linode" ram="768" disk="24576" bandwidth="300" price="2995"}
+
+
+Interacting with Nodes
+======================
+You can get a list of your nodes with the Driver.ListNodes method. 
+Once you have an instance of your nodes, you can check the state of
+the node, check its IP addresses, reboot and terminate your nodes.
+
+> List<Node> nodes = driver.ListNodes ();
+> // print the state of all of the nodes
+> nodes.ForEach (n => Console.WriteLine ("node state:  {0}", n.State));
+>
+> // reboot all the nodes
+> nodes.ForEach (n => n.Reboot ());
+>
+> // destroy all the nodes
+> nodes.ForEach (n => n.Destroy ());
+
+Properties of the node can change between the time you got a reference
+to the node and now.  To get the update properties of the node use the
+Update () method.
+
+> node.Reboot ();
+> while (node.State == NodeState.ShuttingDown) {
+>     node.Update ();
+> }
+
+
