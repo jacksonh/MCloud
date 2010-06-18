@@ -45,6 +45,9 @@ namespace MCloud.Linode {
 			}
 			response.Errors = errors.ToArray ();
 
+			if (errors.Count > 0)
+				throw new Exception (errors [0].Message);
+			
 			List<JObject> datas = new List<JObject> ();
 			JArray data = obj ["DATA"] as JArray;
 			if (data != null) {
