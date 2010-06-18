@@ -123,12 +123,12 @@ MCloud.Deploy namespace to setup your node.  The best way to do this
 is to create a MultistepDeployment and adding each of your steps to it
 in the collection initializer.
 
-   MultiStepDeployment md = new MultiStepDeployment () {
-       new ScriptDeployment ("setup_db.sh"),
-       new ScriptDeployment ("setup_webserver.sh"),
-       new PutDirectoryDeployment ("/src/thesite", "/srv/www/thesite"),
-       new SSHDeployment ("service apache2 restart")
-   }
+       MultiStepDeployment md = new MultiStepDeployment () {
+           new ScriptDeployment ("setup_db.sh"),
+           new ScriptDeployment ("setup_webserver.sh"),
+           new PutDirectoryDeployment ("/src/thesite", "/srv/www/thesite"),
+           new SSHDeployment ("service apache2 restart")
+       }
 
 The following deployment steps are available:
 
