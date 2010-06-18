@@ -125,10 +125,11 @@ in the collection initializer.
    }
 
 The following deployment steps are available:
-* MultiStepDeployment: Used to run a series of deployments.
-* PutFileDeployment: Put a single file on the node.
-* PutFilesDeployment: Put a list of files on the node.
-* PutDirectoryDeployment: Recursively copy a directory to the node.
-* ScriptDeployment: Copy a local script to the node and run it.
-* SSHDeployment: Run a single unix command on the node.
-* SSHKeyDeployment: Copy the current users ssh key to the node.
+
+ * **MultiStepDeployment**: Used to run a series of deployments.
+ * **PutFileDeployment**: Put a single file on the node.
+ * **PutFilesDeployment**: Put a list of files on the node.
+ * **PutDirectoryDeployment**: Recursively copy a directory to the node.
+ * **ScriptDeployment**: Copy a local script to the node and run it.
+ * **SSHDeployment**: Run a single unix command on the node.
+ * **SSHKeyDeployment**: Copy the current users ssh key to the node.
