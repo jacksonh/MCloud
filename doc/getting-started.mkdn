@@ -1,5 +1,11 @@
 MCloud Getting Started Guide
 =============================
+To get started with MCloud you can download the compiled binary and
+all its dependencies here: http://github.com/jacksonh/MCloud/downloads
+once you have MCloud downloaded you can reference MCloud.dll in your
+.net project.
+
+A sample application is available in the samples directory.
 
 
 Creating accounts
