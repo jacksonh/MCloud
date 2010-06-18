@@ -7,7 +7,7 @@ namespace MCloud.Linode {
 
 	public class LinodeDriver : NodeDriver {
 
-		public LinodeDriver (string key, string secret) : base (key, secret)
+		public LinodeDriver (string key) : base (key, null)
 		{
 			API = new LinodeAPI (this);
 		}
