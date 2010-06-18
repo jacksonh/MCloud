@@ -1,24 +1,23 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" ctype="Workspace" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MCloud/Node.cs" ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="samples/LINODE-KEY.txt" ctype="Workbench">
     <Files>
-      <File FileName="MCloud/MCloud.Linode/PaymentTerm.cs" Line="1" Column="1" />
-      <File FileName="MCloud/MCloud.Linode/LinodeResponse.cs" Line="1" Column="1" />
       <File FileName="MCloud/MCloud.Linode/LinodeRequest.cs" Line="1" Column="1" />
       <File FileName="MCloud/MCloud.Linode/LinodeNodeOptions.cs" Line="1" Column="1" />
-      <File FileName="MCloud/MCloud.Linode/LinodeJobResponse.cs" Line="1" Column="1" />
       <File FileName="MCloud/MCloud.Linode/LinodeError.cs" Line="1" Column="1" />
       <File FileName="MCloud/MCloud.Linode/LinodeDriver.cs" Line="1" Column="1" />
       <File FileName="MCloud/MCloud.Linode/LinodeCertificatePolicy.cs" Line="2" Column="14" />
-      <File FileName="MCloud/MCloud.Linode/LinodeAPI.cs" Line="14" Column="1" />
+      <File FileName="MCloud/MCloud.Linode/LinodeAPI.cs" Line="166" Column="53" />
       <File FileName="MCloud/Node.cs" Line="17" Column="56" />
+      <File FileName="MCloud/NodeLocation.cs" Line="1" Column="1" />
+      <File FileName="samples/CreateLinode.cs" Line="57" Column="1" />
+      <File FileName="samples/LINODE-KEY.txt" Line="1" Column="29" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="MCloud" expanded="True" selected="True">
-            <Node name="MCloud.Linode" expanded="True" />
-          </Node>
+          <Node name="MCloud" selected="True" />
+          <Node name="samples" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
