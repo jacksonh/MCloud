@@ -47,20 +47,19 @@ provider to see what sort of node you can create. Here are the things
 you can query for with MCloud:
 
  Returns a list of images such as "Open Suse 11.2" or "Red Hat".
-> driver.ListImages ();
->
-> { NodeImage id="54" name="Slackware 12.2" driver="Linode", NodeImage id="41" name="Ubuntu 8.04 LTS" driver="Linode" }
+
+ 	 driver.ListImages ();
+ 	 { NodeImage id="54" name="Slackware 12.2" driver="Linode", NodeImage id="41" name="Ubuntu 8.04 LTS" driver="Linode" }
 
 Returns a list of the geographical data center locations.
-> driver.ListLocations ();
->
->{ NodeLocation id="2" name="Dallas, TX, USA" driver="Linode" Country="US", NodeLocation id="3" name="Fremont, CA, USA" driver="Linode" Country="US", }
 
-Returns a list of the available sizes (packages of ram, gb, transfer
-for set prices).
-> driver.ListSizes ()
->
-> { NodeSize id="1" name="Linode 512" driver="Linode" ram="512" disk="16384" bandwidth="200" price="1995", NodeSize id="2" name="Linode 768" driver="Linode" ram="768" disk="24576" bandwidth="300" price="2995"}
+	driver.ListLocations ();
+	{ NodeLocation id="2" name="Dallas, TX, USA" driver="Linode" Country="US", NodeLocation id="3" name="Fremont, CA, USA" driver="Linode" Country="US", }
+
+Returns a list of the available sizes (packages of ram, gb, transfer for set prices).
+
+	driver.ListSizes ()
+	{ NodeSize id="1" name="Linode 512" driver="Linode" ram="512" disk="16384" bandwidth="200" price="1995", NodeSize id="2" name="Linode 768" driver="Linode" ram="768" disk="24576" bandwidth="300" price="2995"}
 
 
 Interacting with Nodes
@@ -69,26 +68,67 @@ You can get a list of your nodes with the Driver.ListNodes method.
 Once you have an instance of your nodes, you can check the state of
 the node, check its IP addresses, reboot and terminate your nodes.
 
-> List<Node> nodes = driver.ListNodes ();
-> // print the state of all of the nodes
-> nodes.ForEach (n => Console.WriteLine ("node state:  {0}", n.State));
->
-> // reboot all the nodes
-> nodes.ForEach (n => n.Reboot ());
->
-> // destroy all the nodes
-> nodes.ForEach (n => n.Destroy ());
+     
+    List<Node> nodes = driver.ListNodes ();
+    // print the state of all of the nodes
+    nodes.ForEach (n => Console.WriteLine ("node state:  {0}", n.State));
+
+    // reboot all the nodes
+    nodes.ForEach (n => n.Reboot ());
+
+    // destroy all the nodes
+    nodes.ForEach (n => n.Destroy ());
 
 Properties of the node can change between the time you got a reference
 to the node and now.  To get the update properties of the node use the
 Update () method.
 
-> node.Reboot ();
->
-> while (node.State == NodeState.ShuttingDown) {
->
->     node.Update ();
->
-> }
+       node.Reboot ();
+           while (node.State == NodeState.ShuttingDown) {
+       	   node.Update ();
+       }
 
 
+Creating new Nodes
+==================
+Once you have found an image, size and location that meet your needs
+you can create a new node with the CreateNode method. This is a
+synchronous method that will create a new node on the cloud provider
+and return once the node has been created. Nodes will not be
+immediately available after being created as they still have to wait
+for their boot proccess to finish.
+
+    NodeAuth auth = new NodeAuth (NodeAuthType.Password, "root", "mypassword");
+    Node node = driver.CreateNode ("My Node", size, image, location, auth);
+
+The NodeAuth object passed to CreateNode is used to create a login to
+the machine once it is booted. So if you use a NodeAuthType.Password
+the root user password will be set to that value.  If you use a
+NodeAuthType.SSHKey the supplied keypath will be used for login. If
+your image is preconfigured with a authorization method, you can use
+the NodeAuthType.None.
+
+
+Deploying your node
+===================
+
+Once a node is create you can use Deployment objects from the
+MCloud.Deploy namespace to setup your node.  The best way to do this
+is to create a MultistepDeployment and adding each of your steps to it
+in the collection initializer.
+
+   MultiStepDeployment md = new MultiStepDeployment () {
+       new ScriptDeployment ("setup_db.sh"),
+       new ScriptDeployment ("setup_webserver.sh"),
+       new PutDirectoryDeployment ("/src/thesite", "/srv/www/thesite"),
+       new SSHDeployment ("service apache2 restart")
+   }
+
+The following deployment steps are available:
+* MultiStepDeployment: Used to run a series of deployments.
+* PutFileDeployment: Put a single file on the node.
+* PutFilesDeployment: Put a list of files on the node.
+* PutDirectoryDeployment: Recursively copy a directory to the node.
+* ScriptDeployment: Copy a local script to the node and run it.
+* SSHDeployment: Run a single unix command on the node.
+* SSHKeyDeployment: Copy the current users ssh key to the node.
