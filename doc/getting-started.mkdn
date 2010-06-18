@@ -129,7 +129,8 @@ in the collection initializer.
            new PutDirectoryDeployment ("/src/thesite", "/srv/www/thesite"),
            new SSHDeployment ("service apache2 restart")
        }
-
+       nodes.ForEach (n => n.Deploy (md, auth));
+       
 The following deployment steps are available:
 
  * **MultiStepDeployment**: Used to run a series of deployments.
