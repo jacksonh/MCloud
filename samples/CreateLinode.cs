@@ -57,9 +57,9 @@ namespace samples
 
 			var deployment = new MultiStepDeployment () {
 				// Create a file on the node
-				new SSHDeployment ("touch /root/test"),
+				new RunCommand ("touch /root/test"),
 				// Upload a file to the node
-				new PutFileDeployment ("CreateLinode.exe"),
+				new PutFile ("CreateLinode.exe"),
 			};
 			n.Deploy (deployment, auth);
 			

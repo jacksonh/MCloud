@@ -124,19 +124,20 @@ is to create a MultistepDeployment and adding each of your steps to it
 in the collection initializer.
 
        MultiStepDeployment md = new MultiStepDeployment () {
-           new ScriptDeployment ("setup_db.sh"),
-           new ScriptDeployment ("setup_webserver.sh"),
-           new PutDirectoryDeployment ("/src/thesite", "/srv/www/thesite"),
-           new SSHDeployment ("service apache2 restart")
+           new RunScript ("setup_db.sh"),
+           new RunScript ("setup_webserver.sh"),
+           new PutDirectory ("/src/thesite", "/srv/www/thesite"),
+           new RunCommand ("service apache2 restart")
        }
        nodes.ForEach (n => n.Deploy (md, auth));
        
 The following deployment steps are available:
 
+ * **CreateUser**: Create a new user on the node
  * **MultiStepDeployment**: Used to run a series of deployments.
- * **PutFileDeployment**: Put a single file on the node.
- * **PutFilesDeployment**: Put a list of files on the node.
- * **PutDirectoryDeployment**: Recursively copy a directory to the node.
- * **ScriptDeployment**: Copy a local script to the node and run it.
- * **SSHDeployment**: Run a single unix command on the node.
- * **SSHKeyDeployment**: Copy the current users ssh key to the node.
+ * **PutFile**: Put a single file on the node.
+ * **PutFiles**: Put a list of files on the node.
+ * **PutDirectory**: Recursively copy a directory to the node.
+ * **PutSSHKeys**: Copy a users ssh key to the node.
+ * **RunScript**: Copy a local script to the node and run it.
+ * **RunCommand**: Run a single unix command on the node.

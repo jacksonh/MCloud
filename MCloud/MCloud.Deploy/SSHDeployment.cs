@@ -7,31 +7,15 @@ using Tamir.SharpSsh;
 namespace MCloud.Deploy {
 
 	/// <summary>
-	/// Run an SSH command on the remote server
+	/// Base class for deployment types that use SSH.
 	/// </summary>
-	public class SSHDeployment : Deployment {
+	public abstract class SSHDeployment : Deployment {
 
 		private static readonly int DefaultMaxConnectionAttempts = 10;
 
-		/// <summary>
-		/// Run the specified command on the server
-		/// </summary>
-		public SSHDeployment (string cmd)
+		public SSHDeployment ()
 		{
-			Command = cmd;
 			MaxConnectionAttempts = DefaultMaxConnectionAttempts;
-		}
-
-		protected SSHDeployment ()
-		{
-		}
-
-		/// <summary>
-		/// The command to run on the server
-		/// </summary>
-		public string Command {
-			get;
-			private set;
 		}
 
 		/// <summary>
@@ -40,27 +24,6 @@ namespace MCloud.Deploy {
 		public int MaxConnectionAttempts {
 			get;
 			set;
-		}
-
-		protected override void RunImpl (Node node, NodeAuth auth)
-		{
-			if (node.PublicIPs.Count < 1)
-				throw new ArgumentException ("node", "No public IPs available on node.");
-
-			string host = node.PublicIPs [0].ToString ();
-
-			RunCommand (Command, host, auth);
-		}
-
-		protected void RunCommand (string command, string host, NodeAuth auth)
-		{
-			SshExec exec = new SshExec (host, auth.UserName);
-
-			SetupSSH (exec, auth);
-
-			Console.WriteLine ("running command:  {0}   on host:  {1}", command, host);
-			Console.WriteLine (exec.RunCommand (command));
-			exec.Close ();
 		}
 
 		protected void SetupSSH (SshBase ssh, NodeAuth auth)
@@ -87,6 +50,39 @@ namespace MCloud.Deploy {
 			if (error != null)
 				throw error;
 
+		}
+		
+				
+		protected void RunCommand (string command, string host, NodeAuth auth)
+		{
+               SshExec exec = new SshExec (host, auth.UserName);
+
+               SetupSSH (exec, auth);
+
+               Console.WriteLine ("running command:  {0}   on host:  {1}", command, host);
+               Console.WriteLine (exec.RunCommand (command));
+               exec.Close ();
+       	}
+		
+		
+		protected void PutFile (string host, NodeAuth auth, string local, string remote)
+		{
+			Scp scp = new Scp (host, auth.UserName);
+
+			SetupSSH (scp, auth);
+
+			scp.Put (local, remote);
+			scp.Close ();
+		}
+
+		protected void PutDirectory (string host, NodeAuth auth, string local, string remote)
+		{
+			Scp scp = new Scp (host, auth.UserName);
+
+			SetupSSH (scp, auth);
+
+			scp.To (local, remote, true);
+			scp.Close ();
 		}
 	}
 }
