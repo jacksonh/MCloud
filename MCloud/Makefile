@@ -45,6 +45,9 @@ MCloud.dll: $(SOURCES)
 test.exe: test.cs MCloud.dll
 	gmcs -r:MCloud.dll -debug test.cs
 
+ndc-setup.exe: ndc-setup.cs MCloud.dll
+	gmcs -r:MCloud.dll -debug ndc-setup.cs
+
 clean:
 	rm -rf MCloud.dll
 	rm -rf test.exe
