@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{37987133-B5D5-4B8F-9F0F-55C80787E821}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MCloud</RootNamespace>
+    <AssemblyName>MCloud</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="Entity.cs" />
+    <Compile Include="Node.cs" />
+    <Compile Include="NodeAuth.cs" />
+    <Compile Include="NodeAuthType.cs" />
+    <Compile Include="NodeDriver.cs" />
+    <Compile Include="NodeImage.cs" />
+    <Compile Include="NodeLocation.cs" />
+    <Compile Include="NodeOptions.cs" />
+    <Compile Include="NodeProvider.cs" />
+    <Compile Include="NodeSize.cs" />
+    <Compile Include="MCloud.Deploy\Deployment.cs" />
+    <Compile Include="MCloud.Deploy\MultiStepDeployment.cs" />
+    <Compile Include="MCloud.Deploy\SSHDeployment.cs" />
+    <Compile Include="MCloud.EC2\EC2Driver.cs" />
+    <Compile Include="MCloud.EC2\EC2Node.cs" />
+    <Compile Include="MCloud.EC2\EC2NodeOptions.cs" />
+    <Compile Include="MCloud.EC2\EC2NodeSizes.cs" />
+    <Compile Include="MCloud.Linode\LinodeAPI.cs" />
+    <Compile Include="MCloud.Linode\LinodeCertificatePolicy.cs" />
+    <Compile Include="MCloud.Linode\LinodeDriver.cs" />
+    <Compile Include="MCloud.Linode\LinodeError.cs" />
+    <Compile Include="MCloud.Linode\LinodeNode.cs" />
+    <Compile Include="MCloud.Linode\LinodeNodeOptions.cs" />
+    <Compile Include="MCloud.Linode\LinodeRequest.cs" />
+    <Compile Include="MCloud.Linode\LinodeResponse.cs" />
+    <Compile Include="MCloud.Linode\PaymentTerm.cs" />
+    <Compile Include="NodeState.cs" />
+    <Compile Include="MCloud.Server\ServerNode.cs" />
+    <Compile Include="MCloud.Server\ServerDriver.cs" />
+    <Compile Include="MCloud.Deploy\PutSSHKeys.cs" />
+    <Compile Include="MCloud.Deploy\PutDirectory.cs" />
+    <Compile Include="MCloud.Deploy\PutFile.cs" />
+    <Compile Include="MCloud.Deploy\PutFiles.cs" />
+    <Compile Include="MCloud.Deploy\RunCommand.cs" />
+    <Compile Include="MCloud.Deploy\RunScript.cs" />
+    <Compile Include="MCloud.Deploy\CreateUser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK, Version=1.0.6.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\AWSSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="DiffieHellman, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\DiffieHellman.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Net20, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Newtonsoft.Json.Net20.dll</HintPath>
+    </Reference>
+    <Reference Include="Org.Mentalis.Security, Version=1.0.13.715, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Org.Mentalis.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Tamir.SharpSSH, Version=1.1.1.13, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Tamir.SharpSSH.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Core" />
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MCloud.Server\" />
+  </ItemGroup>
+</Project>
