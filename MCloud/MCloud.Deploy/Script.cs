@@ -7,13 +7,13 @@ using Tamir.SharpSsh;
 
 namespace MCloud.Deploy {
 
-	public class Script : PutFile {
+	public class ScriptDeployment : PutFileDeployment {
 
-		public Script (string local) : base (local)
+		public ScriptDeployment (string local) : base (local)
 		{
 		}
 
-		public Script (string local, string remote_dir) : base (local, remote_dir)
+		public ScriptDeployment (string local, string remote_dir) : base (local, remote_dir)
 		{
 		}
 
