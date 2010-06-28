@@ -67,6 +67,7 @@
     <Compile Include="MCloud.Deploy\RunCommand.cs" />
     <Compile Include="MCloud.Deploy\RunScript.cs" />
     <Compile Include="MCloud.Deploy\CreateUser.cs" />
+    <Compile Include="MCloud.Deploy\PushNpgsqlDB.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AWSSDK, Version=1.0.6.0, Culture=neutral, PublicKeyToken=null">
@@ -92,6 +93,8 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Core" />
     <Reference Include="System" />
+    <Reference Include="Npgsql" />
+    <Reference Include="ICSharpCode.SharpZipLib" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MCloud.Server\" />

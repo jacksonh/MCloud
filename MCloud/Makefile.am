@@ -72,7 +72,7 @@ FILES = \
 	NodeSize.cs \
 	MCloud.Deploy/Deployment.cs \
 	MCloud.Deploy/MultiStepDeployment.cs \
-	MCloud.Deploy/PutSSHKeys.cs \
+	MCloud.Deploy/SSHDeployment.cs \
 	MCloud.EC2/EC2Driver.cs \
 	MCloud.EC2/EC2Node.cs \
 	MCloud.EC2/EC2NodeOptions.cs \
@@ -89,13 +89,14 @@ FILES = \
 	NodeState.cs \
 	MCloud.Server/ServerNode.cs \
 	MCloud.Server/ServerDriver.cs \
+	MCloud.Deploy/PutSSHKeys.cs \
 	MCloud.Deploy/PutDirectory.cs \
 	MCloud.Deploy/PutFile.cs \
 	MCloud.Deploy/PutFiles.cs \
 	MCloud.Deploy/RunCommand.cs \
-	MCloud.Deploy/SSHDeployment.cs \
 	MCloud.Deploy/RunScript.cs \
-	MCloud.Deploy/CreateUser.cs 
+	MCloud.Deploy/CreateUser.cs \
+	MCloud.Deploy/PushNpgsqlDB.cs 
 
 DATA_FILES = 
 
@@ -108,7 +109,9 @@ EXTRAS = \
 REFERENCES =  \
 	System.Web \
 	System.Core \
-	System
+	System \
+	Npgsql \
+	ICSharpCode.SharpZipLib
 
 DLL_REFERENCES =  \
 	../lib/AWSSDK.dll \

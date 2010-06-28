@@ -1,23 +1,37 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" ctype="Workspace" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="samples/LINODE-KEY.txt" ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MCloud/MCloud.Deploy/PushNpgsqlDB.cs" ctype="Workbench">
     <Files>
+      <File FileName="Assembly Browser" />
       <File FileName="MCloud/MCloud.Linode/LinodeRequest.cs" Line="1" Column="1" />
       <File FileName="MCloud/MCloud.Linode/LinodeNodeOptions.cs" Line="1" Column="1" />
       <File FileName="MCloud/MCloud.Linode/LinodeError.cs" Line="1" Column="1" />
       <File FileName="MCloud/MCloud.Linode/LinodeDriver.cs" Line="1" Column="1" />
-      <File FileName="MCloud/MCloud.Linode/LinodeCertificatePolicy.cs" Line="2" Column="14" />
-      <File FileName="MCloud/MCloud.Linode/LinodeAPI.cs" Line="166" Column="53" />
-      <File FileName="MCloud/Node.cs" Line="17" Column="56" />
+      <File FileName="MCloud/MCloud.Linode/LinodeCertificatePolicy.cs" Line="1" Column="1" />
+      <File FileName="MCloud/MCloud.Linode/LinodeAPI.cs" Line="1" Column="1" />
+      <File FileName="MCloud/Node.cs" Line="1" Column="1" />
       <File FileName="MCloud/NodeLocation.cs" Line="1" Column="1" />
-      <File FileName="samples/CreateLinode.cs" Line="57" Column="1" />
-      <File FileName="samples/LINODE-KEY.txt" Line="1" Column="29" />
+      <File FileName="samples/CreateLinode.cs" Line="1" Column="1" />
+      <File FileName="samples/LINODE-KEY.txt" Line="1" Column="1" />
+      <File FileName="MCloud/MCloud.Server/ServerNode.cs" Line="1" Column="1" />
+      <File FileName="MCloud/MCloud.Deploy/MultiStepDeployment.cs" Line="1" Column="1" />
+      <File FileName="MCloud/MCloud.Deploy/PutSSHKeys.cs" Line="1" Column="1" />
+      <File FileName="MCloud/MCloud.Deploy/PutFile.cs" Line="1" Column="1" />
+      <File FileName="MCloud/MCloud.Deploy/PutFiles.cs" Line="1" Column="1" />
+      <File FileName="MCloud/MCloud.Linode/LinodeNode.cs" Line="1" Column="1" />
+      <File FileName="MCloud/MCloud.Deploy/RunScript.cs" Line="1" Column="1" />
+      <File FileName="MCloud/MCloud.EC2/EC2Driver.cs" Line="1" Column="1" />
+      <File FileName="MCloud/MCloud.Deploy/RunCommand.cs" Line="1" Column="1" />
+      <File FileName="MCloud/MCloud.Deploy/CreateUser.cs" Line="1" Column="1" />
+      <File FileName="MCloud/MCloud.Deploy/PushNpgsqlDB.cs" Line="11" Column="39" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="MCloud" selected="True" />
-          <Node name="samples" expanded="True" />
+          <Node name="MCloud" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="MCloud.Deploy" expanded="True" selected="True" />
+          </Node>
         </State>
       </Pad>
       <Pad Id="ClassPad">
