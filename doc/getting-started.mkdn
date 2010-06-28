@@ -135,6 +135,8 @@ The following deployment steps are available:
 
  * **CreateUser**: Create a new user on the node
  * **MultiStepDeployment**: Used to run a series of deployments.
+ * **PushNpgsqlDB**: Push the specified postgresql database and all of
+ * **its data to the server.
  * **PutFile**: Put a single file on the node.
  * **PutFiles**: Put a list of files on the node.
  * **PutDirectory**: Recursively copy a directory to the node.
