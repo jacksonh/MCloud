@@ -16,7 +16,7 @@ namespace MCloud.Deploy
 	/// information.
 	/// The remote server must already have postgresql installed and running.
 	/// </summary>
-	public class PushNpgsqlDB : SSHDeployment
+	public class PushPgsqlDB : SSHDeployment
 	{
 		private string database;
 		private string dump_file;
@@ -28,7 +28,7 @@ namespace MCloud.Deploy
 		/// A <see cref="System.String"/>
 		/// The name of the database to pull from and push to.
 		/// </param>
-		public PushNpgsqlDB (string db_name)
+		public PushPgsqlDB (string db_name)
 		{
 			Database = db_name;
 		}

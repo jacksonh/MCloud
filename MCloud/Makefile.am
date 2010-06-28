@@ -96,7 +96,7 @@ FILES = \
 	MCloud.Deploy/RunCommand.cs \
 	MCloud.Deploy/RunScript.cs \
 	MCloud.Deploy/CreateUser.cs \
-	MCloud.Deploy/PushNpgsqlDB.cs 
+	MCloud.Deploy/PushPgsqlDB.cs 
 
 DATA_FILES = 
 
