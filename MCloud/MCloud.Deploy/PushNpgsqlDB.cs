@@ -8,16 +8,34 @@ using ICSharpCode.SharpZipLib.GZip;
 
 namespace MCloud.Deploy
 {
+	/// <summary>
+	/// Push a local database to the node. If the remote node already has
+	/// a database with the same name it will be destroyed and all of its 
+	/// data will be lost.
+	/// This will push the schema and all data, it will not push any privilege 
+	/// information.
+	/// The remote server must already have postgresql installed and running.
+	/// </summary>
 	public class PushNpgsqlDB : SSHDeployment
 	{
 		private string database;
 		private string dump_file;
 		
+		/// <summary>
+		/// Create a PushNpgsqlDB deployment command with the specified database name.
+		/// </summary>
+		/// <param name="db_name">
+		/// A <see cref="System.String"/>
+		/// The name of the database to pull from and push to.
+		/// </param>
 		public PushNpgsqlDB (string db_name)
 		{
 			Database = db_name;
 		}
 		
+		/// <summary>
+		/// The name of the database to pull data from.
+		/// </summary>
 		public string Database {
 			get { return database; }
 			set {
